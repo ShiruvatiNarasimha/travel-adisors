@@ -9,15 +9,16 @@ import {
   CardActions,
   Chip,
 } from "@mui/material";
-import LocationOn from "@mui/icons-material/LocationOn";
-import Phone from "@mui/icons-material/Phone";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import PhoneIcon from "@mui/icons-material/Phone";
 import Rating from "@mui/material/Rating";
-
+import { makeStyles } from "@mui/styles";
 import useStyles from "./styles.js";
 
 const PlaceDetails = ({ place, selected, refProp }) => {
   if (selected)
     refProp?.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+
   const classes = useStyles();
 
   return (
@@ -53,21 +54,27 @@ const PlaceDetails = ({ place, selected, refProp }) => {
             {place.ranking}
           </Typography>
         </Box>
-        {place?.awards?.map((award) => (
+        {place?.awards?.map((award, index) => (
           <Box
+            key={index}
             display="flex"
             justifyContent="space-between"
             my={1}
             alignItems="center"
           >
-            <img src={award.images.small} />
+            <img src={award.images.small} alt={award.display_name} />
             <Typography variant="subtitle2" color="textSecondary">
               {award.display_name}
             </Typography>
           </Box>
         ))}
-        {place?.cuisine?.map(({ name }) => (
-          <Chip key={name} size="small" label={name} className={classes.chip} />
+        {place?.cuisine?.map(({ name }, index) => (
+          <Chip
+            key={index}
+            size="small"
+            label={name}
+            className={classes.chip}
+          />
         ))}
         {place.address && (
           <Typography
@@ -91,20 +98,24 @@ const PlaceDetails = ({ place, selected, refProp }) => {
         )}
       </CardContent>
       <CardActions>
-        <Button
-          size="small"
-          color="primary"
-          onClick={() => window.open(place.web_url, "_blank")}
-        >
-          Trip Advisor
-        </Button>
-        <Button
-          size="small"
-          color="primary"
-          onClick={() => window.open(place.website, "_blank")}
-        >
-          Website
-        </Button>
+        {place.web_url && (
+          <Button
+            size="small"
+            color="primary"
+            onClick={() => window.open(place.web_url, "_blank")}
+          >
+            Trip Advisor
+          </Button>
+        )}
+        {place.website && (
+          <Button
+            size="small"
+            color="primary"
+            onClick={() => window.open(place.website, "_blank")}
+          >
+            Website
+          </Button>
+        )}
       </CardActions>
     </Card>
   );
