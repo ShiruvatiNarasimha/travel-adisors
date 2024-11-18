@@ -1,5 +1,7 @@
 # Travel Advisor
 
+![image alt](https://github.com/ShiruvatiNarasimha/travel-adisors/blob/63b1c53a1ab97077a0e5fb80b21cac42f879c4cb/Screenshot%202024-11-18%20154417.png)
+
 **Travel Advisor** is a modern web application that helps users explore nearby restaurants, cafes, and attractions using an interactive map powered by Google Maps API. Users can search for places by location, filter results by rating or type, and view detailed information about each place.
 
 ## Features
